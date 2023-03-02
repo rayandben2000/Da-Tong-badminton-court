@@ -1,8 +1,9 @@
 {
-  "name": "Hello Extensions",
-  "description": "Base Level Extension",
+  "name": "Reservation Tool",
+  "description": "Reserve Da-Tong badminton court",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": ["scripting", "activeTab"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "hello_extensions.png"

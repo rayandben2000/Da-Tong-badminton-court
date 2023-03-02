@@ -1,6 +1,15 @@
 <html>
   <body>
-    <h1>Hello Extensions</h1>
+    <h2>Reservation Tool</h2>
+    <form>
+      <label for="reserveDate">Reservation date:</label>
+      <input type="date" id="reserveDate" name="reserveDate" />
+      <div></div>
+      <label for="reserveTime">Reservation start time: </label>
+      <input id="reserveTime" type="text" name="reserveTime" placeholder="8,10,12"/>
+    </form>
+    <button id="reserveButton">Reserve</button>
+    <div id="msg"></div>
     <script src="popup.js"></script>
   </body>
 </html>

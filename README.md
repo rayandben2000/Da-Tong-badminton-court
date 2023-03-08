@@ -1,9 +1,9 @@
-# Da-Tong-badminton-court
+# Chrome extesion for reserving Da-Tong badminton court 
+![image](https://user-images.githubusercontent.com/44432397/223735558-7c1188b4-fb23-4efd-824d-564047abb1b7.png)
 
 ### How to Use
-1. Open `https://bwd.xuanen.com.tw/wd02.aspx?module=ind&files=ind`
-1. Login your account at chrome
-1. Open chrome devtool (F12)
-1. Go to chrome devtool console tab
-1. Paste script into console
-    - You **need** modify modify start_time & date before paste
+1. Goto [Da-Tong reservation system](https://bwd.xuanen.com.tw/wd02.aspx) and Login your account
+1. Open extesion and selest `Reservation date` & `Reservation start time`
+1. Click Reserve button 
+1. Goto [Order page](https://bwd.xuanen.com.tw/wd02.aspx?Module=member&files=orderx_mt) to see reservation result 
+    * Note: Payment must be made within 10 minutes

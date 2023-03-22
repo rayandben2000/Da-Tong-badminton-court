@@ -19,7 +19,7 @@ const reserve = async (date, startTimes) => {
     let resultMsg = 'Done';
     if (!startTimes || !date) {
         console.error('date & startTimes are required.');
-        return;
+        return 'date & startTimes are required.';
     } else {
         await Promise.all(courts.map(async court => {
             await Promise.all(startTimes.map(async startTime => {
@@ -27,20 +27,28 @@ const reserve = async (date, startTimes) => {
                     `https://bwd.xuanen.com.tw/wd02.aspx?module=net_booking&files=booking_place&StepFlag=25&QPid=${court}&QTime=${startTime}&PT=1&D=${date}`
                 );
                 if (response.url.indexOf("login") != -1) {
-                    resultMsg = "You must login first.";
+                    await Promise.reject("You must login first.");
                 }
             }));
-        }));
+        })).catch(err => {
+            resultMsg = err;
+        });
     }
 
     return resultMsg;
 };
 
-async function getCurrentTab() {
+const getCurrentTab = async () => {
     const queryOptions = { active: true, currentWindow: true };
     const [tab] = await chrome.tabs.query(queryOptions);
     return tab;
 }
+
+const disabledAllFields = (disabled) => {
+    reserveDate.disabled = disabled;
+    reserveTime.disabled = disabled;
+    reserveButton.disabled = disabled;
+};
 
 // Set reserve date interval
 const today = new Date();
@@ -70,11 +78,15 @@ reserveButton.addEventListener('click', async () => {
         return;
     }
 
+    message.innerHTML = "Reserving...";
+    disabledAllFields(true);
+
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: reserve,
         args: [reserveDate.value, startHours]
     }).then(injectionResults => {
         message.innerHTML = injectionResults[0].result
+        disabledAllFields(false);
     });
 });

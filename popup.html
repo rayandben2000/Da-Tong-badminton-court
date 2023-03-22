@@ -1,19 +1,23 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Reservation Tool</title>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <h2>Reservation Tool</h2>
-    <form>
-      <label for="reserveDate">Reservation date:</label>
-      <input type="date" id="reserveDate" name="reserveDate" />
-      <div></div>
-      <label for="reserveTime">Reservation start time: </label>
-      <input id="reserveTime" type="text" name="reserveTime" placeholder="8,10,12"/>
-    </form>
-    <button id="reserveButton">Reserve</button>
-    <div id="msg"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Reservation Tool</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="popup.js"></script>
+</head>
+
+<body>
+  <h2>Reservation Tool</h2>
+  <form>
+    <label for="reserveDate">Reservation date:</label>
+    <input type="date" id="reserveDate" name="reserveDate" />
+    <div></div>
+    <label for="reserveTime">Reservation start time: </label>
+    <input id="reserveTime" type="text" name="reserveTime" placeholder="8,10,12" />
+  </form>
+  <button id="reserveButton" class="reserve-button">Reserve</button>
+  <div id="msg" class="msg"></div>
+</body>
+
 </html>

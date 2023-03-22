@@ -4,6 +4,11 @@ window.onload = function () {
     const reserveButton = document.getElementById("reserveButton");
     const message = document.getElementById("msg");
 
+    const SetMsg = (msg, isError) => {
+        message.style.color = isError ? "red" : "black";
+        message.innerHTML = msg;
+    };
+
     const reserve = async (date, startTimes) => {
         const courts = [
             1112, // 5-1
@@ -36,7 +41,7 @@ window.onload = function () {
             });
         }
 
-        return resultMsg;
+        return { resultMsg, isError: resultMsg != 'Done' };
     };
 
     const getCurrentTab = async () => {
@@ -62,7 +67,7 @@ window.onload = function () {
     reserveButton.addEventListener('click', async () => {
         const tab = await getCurrentTab();
         if (!tab.url.startsWith("https://bwd.xuanen.com.tw/wd02.aspx")) {
-            message.innerHTML = "You must at Da-Tong Sport center page.";
+            SetMsg("You must at Da-Tong Sport center page.", true);
             return;
         }
 
@@ -70,16 +75,16 @@ window.onload = function () {
             .map(value => parseInt(value))
             .filter(num => (num > 4 && num < 22));
         if (startHours.length <= 0) {
-            message.innerHTML = "Reservation start time is invalid.";
+            SetMsg("Reservation start time is invalid.", true);
             return;
         }
 
         if (!reserveDate.value) {
-            message.innerHTML = "Reservation date is invalid.";
+            SetMsg("Reservation date is invalid.", true);
             return;
         }
 
-        message.innerHTML = "Reserving...";
+        SetMsg("Reserving...", false);
         disabledAllFields(true);
 
         chrome.scripting.executeScript({
@@ -87,7 +92,7 @@ window.onload = function () {
             func: reserve,
             args: [reserveDate.value, startHours]
         }).then(injectionResults => {
-            message.innerHTML = injectionResults[0].result
+            SetMsg(injectionResults[0].result.resultMsg, injectionResults[0].result.isError);
             disabledAllFields(false);
         });
     });

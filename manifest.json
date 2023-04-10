@@ -1,7 +1,7 @@
 {
   "name": "Reservation Tool",
   "description": "Reserve Da-Tong badminton court",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "permissions": ["scripting", "activeTab"],
   "action": {
